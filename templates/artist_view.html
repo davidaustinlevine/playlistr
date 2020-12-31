@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Artist View{% endblock %}
+
+{% block content %}
+<div class="pa-5 text-xl font-bold">Artists</div>
+{% if artists %}
+<ul>
+{% for artist in artists %}
+    <li>{{ artist }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

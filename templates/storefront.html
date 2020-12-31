@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Storefront{% endblock %}
+
+{% block content %}
+<div class="pa-5 text-xl font-bold">Storefront</div>
+{% if albums %}
+<ul>
+{% for album in albums %}
+    <li>{{ album }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
