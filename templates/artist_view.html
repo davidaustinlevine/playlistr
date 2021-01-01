@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tailwind_filters %}
 
 {% block title %}Artist View{% endblock %}
 
@@ -7,8 +8,15 @@
 {% if artists %}
 <ul>
 {% for artist in artists %}
-    <li>{{ artist }}</li>
+    <li>{{ artist.name }} ({{ artist.year_founded }})</li>
 {% endfor %}
 </ul>
 {% endif %}
+<div class="p-5">
+    <form method="POST" action="{% url 'artist_view' %}">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <input type="submit" value="Add Artist" class=" bg-blue-700 text-white font-semibold text-xl px-8 py-2 outline-none rounded-full text-center uppercase" />
+    </form>
+</div>
 {% endblock %}

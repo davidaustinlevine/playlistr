@@ -11,6 +11,7 @@ class Album(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=255)
+    year_founded = models.CharField(max_length=4, blank=True, null=True)
 
     def __str__(self):
         return self.name
