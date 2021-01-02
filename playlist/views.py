@@ -44,3 +44,11 @@ class ArtistApiView(APIView):
         artists = Artist.objects.all()
         arist_serializer = ArtistSerializer(instance=artists, many=True)
         return Response(data=arist_serializer.data)
+    
+    def post(self, request):
+        serializer = ArtistSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=201)
+        else:
+            return Response(data=serializer.errors, status=400)
