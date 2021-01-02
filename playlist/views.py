@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import serializers
 from playlist.models import Artist, Album, Track
 from playlist.forms import ArtistForm
 
@@ -29,3 +32,15 @@ def artist_detail_view(request, pk):
     return render(request, 'artist_detail_view.html', {
         'artist': Artist.objects.get(pk=pk)
     })
+
+class ArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model = Artist
+
+
+class ArtistApiView(APIView):
+    def get(self, request):
+        artists = Artist.objects.all()
+        arist_serializer = ArtistSerializer(instance=artists, many=True)
+        return Response(data=arist_serializer.data)
